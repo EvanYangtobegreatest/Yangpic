@@ -148,13 +148,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
               if (err) {
                 console.log('Error', err);
               } else {
-                this.images = data.Contents.filter(item => 
+               const images = data.Contents.filter(item => 
                   item.Key.endsWith('.JPG') || item.Key.endsWith('.png') || item.Key.endsWith('.gif') || item.Key.endsWith('.jpeg')
                 ).map(item => ({
                   key: item.Key,
                   url: `${publicURL}/${item.Key}`
                 }));
-		   console.log(this.images)   
+		   this.images = images.slice(0, 5);  
               }
             });
           } catch (error) {
