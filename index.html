@@ -72,7 +72,7 @@
 	<!-- Hero section  -->
 	 <div id="app" class="hero-section">
    <div class="hero-slider owl-carousel" v-for="(image, index) in images" :key="index">
-    <div class="hero-item portfolio-item set-bg" :style="{ backgroundImage: 'url(' + image.url + ')' }">
+    <div class="hero-item portfolio-item" :style="{ backgroundImage: 'url(' + image.url + ')' }">
         <a href="portfolio.html" class="hero-link">
             <h2>Take a look at my Portfolio</h2>
         </a>
@@ -174,7 +174,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       mounted() {
         // 在组件挂载时调用获取图片的函数
         this.fetchImagesFromR2();
-    $('.owl-carousel').owlCarousel();
       }
     });
   </script>
