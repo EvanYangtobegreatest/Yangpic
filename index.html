@@ -161,7 +161,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       }));
 
       // 使用 slice 保留前 2 个图片
-      this.images = images; 
+      this.images = images.slice(0,20); 
 
       console.log(this.images); // 验证切片后的数组
     }
