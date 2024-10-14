@@ -75,8 +75,8 @@
       <div 
         v-for="(image, index) in images" 
         :key="index" 
-        class="hero-item portfolio-item" 
-        :style="{ backgroundImage: `url(${image.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
+        class="hero-item portfolio-item set-bg" 
+        :style="{ backgroundImage: `url(${image.url})` }"
       >
         <a href="portfolio.html" class="hero-link">
           <h2>Take a look at my Portfolio</h2>
