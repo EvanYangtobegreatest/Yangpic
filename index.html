@@ -33,7 +33,13 @@
 	<![endif]-->
 
 </head>
-	
+<style>
+.hero-item {
+  height: 400px; /* 设置高度，确保背景图片有足够空间显示 */
+  background-size: cover;
+  background-position: center;
+}
+</style>	
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -75,8 +81,8 @@
       <div 
         v-for="(image, index) in images" 
         :key="index" 
-        class="hero-item portfolio-item set-bg" 
-        :style="{ backgroundImage: `url(${image.url})` }"
+        class="hero-item portfolio-item" 
+        :style="{ backgroundImage: `url(${image.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
       >
         <a href="portfolio.html" class="hero-link">
           <h2>Take a look at my Portfolio</h2>
