@@ -154,6 +154,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                   key: item.Key,
                   url: `${publicURL}/${item.Key}`
                 }));
+		       this.images = images.slice(0, 5);  
               }
             });
           } catch (error) {
