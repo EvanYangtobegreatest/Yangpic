@@ -70,15 +70,20 @@
 
 	<!-- Hero section  -->
 	<div class="hero-section">
-		<div  id="app" class="hero-slider owl-carousel">
-			<div class="hero-item portfolio-item set-bg" v-for="(image, index) in images" :key="index >
-				<a href="image.url" class="hero-link">
-					<img :src="image.url" :alt="image.key"  class="img-fluid" >
-				</a>
-			</div>
-			
-		</div>
-	</div>
+    <div class="hero-slider owl-carousel">
+      <!-- 循环渲染每个图片 -->
+      <div
+        v-for="(image, index) in images"
+        :key="index"
+        class="hero-item portfolio-item set-bg"
+        :style="{ backgroundImage: `url(${image})` }"
+      >
+        <a href="portfolio.html" class="hero-link">
+          <h2>Take a look at my Portfolio</h2>
+        </a>
+      </div>
+    </div>
+  </div>
 	<!-- Hero section end  -->
 	
 	
