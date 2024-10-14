@@ -71,11 +71,14 @@
 
 	<!-- Hero section  -->
 	 <div id="app" class="hero-section">
-   <div class="hero-slider owl-carousel" v-for="(image, index) in images" :key="index">
- 
-	    <img :src="image.url" :alt="image.key"  class="hero-item portfolio-item set-bg"  >
-    
+   <div class="hero-slider owl-carousel">
+  <div class="hero-item portfolio-item set-bg" v-for="(image, index) in images" :key="index" :data-setbg="image.url">
+    <a href="portfolio.html" class="hero-link">
+      <h2>Take a look at my Portfolio</h2>
+    </a>
+  </div>
 </div>
+
   </div>
 	<!-- Hero section end  -->
 	
