@@ -70,13 +70,14 @@
 
 	<!-- Hero section  -->
 	<div class="hero-section">
-		
 		<div  id="app" class="hero-slider owl-carousel">
-          <div class="hero-item portfolio-item set-bg" v-for="(image, index) in images" :key="index"  >
-            <a href="image.url" class="hero-link"></a>
-          </div>
-        </div>
-		
+			<div class="hero-item portfolio-item set-bg" v-for="(image, index) in images" :key="index >
+				<a href="image.url" class="hero-link">
+					<img :src="image.url" :alt="image.key"  class="img-fluid" >
+				</a>
+			</div>
+			
+		</div>
 	</div>
 	<!-- Hero section end  -->
 	
