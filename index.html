@@ -70,10 +70,19 @@
 	<!-- Header section end  -->
 
 	<!-- Hero section  -->
-	 <  <div >
-   <div  v-for="(image, index) in images" :key="index" >
-			<img :src="image.url" :alt="image.key"   > 
-		</div>
+	 <div id="app" class="hero-section">
+    <div class="hero-slider owl-carousel">
+      <div 
+        v-for="(image, index) in images" 
+        :key="index" 
+        class="hero-item portfolio-item" 
+        :style="{ backgroundImage: `url(${image.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
+      >
+        <a href="portfolio.html" class="hero-link">
+          <h2>Take a look at my Portfolio</h2>
+        </a>
+      </div>
+    </div>
   </div>
 	<!-- Hero section end  -->
 	
