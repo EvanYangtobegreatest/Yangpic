@@ -70,26 +70,28 @@
 
 	<!-- Portfolio section  -->
 	<div class="portfolio-section">
-		<ul class="portfolio-filter controls text-center">
-			<li class="control" data-filter="all">All</li>
-			<li class="control" data-filter=".nature">Nature</li>
-			<li class="control" data-filter=".studio">Studio Photography</li>
-			<li class="control" data-filter=".weddings">Weddings</li>
-			<li class="control" data-filter=".lifestyle">Lifestyle</li>
-			<li class="control" data-filter=".fashion">Fashion</li>
-		</ul>                                                           
-		<div id="app" class="row portfolio-gallery m-0" v-for="(image, index) in images"  :key="index">
-			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0" >
-    <a  :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
-</div>
+    <ul class="portfolio-filter controls text-center">
+        <li class="control" data-filter="all" @click="filterImages('all')">All</li>
+        <li class="control" data-filter=".nature" @click="filterImages('nature')">Nature</li>
+        <li class="control" data-filter=".studio" @click="filterImages('studio')">Studio Photography</li>
+        <li class="control" data-filter=".weddings" @click="filterImages('weddings')">Weddings</li>
+        <li class="control" data-filter=".lifestyle" @click="filterImages('lifestyle')">Lifestyle</li>
+        <li class="control" data-filter=".fashion" @click="filterImages('fashion')">Fashion</li>
+    </ul>                                                           
 
-			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-				<div class="portfolio-item  next-btn">
-					<h2>Next</h2>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="app" class="row portfolio-gallery m-0">
+        <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0" >
+            <a :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
+        </div>
+        
+        <!-- Next Button -->
+        <div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
+            <div class="portfolio-item next-btn">
+                <h2>Next</h2>
+            </div>
+        </div>
+    </div>
+</div>
 	<!-- Portfolio section end  -->
 	
 	<!-- Footer section   -->
