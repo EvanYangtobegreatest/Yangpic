@@ -80,11 +80,9 @@
     </ul>                                                           
 
     <div id="app" class="row portfolio-gallery m-0">
-       <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-    <a :href="image.url" class="portfolio-item img-popup set-bg">
-        <img :src="image.url" alt="Image" style="width: 180px; height: 250px; object-fit: cover;">
-    </a>
-</div>
+      <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
+                <a :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
+            </div>
         
         <!-- Next Button -->
         <div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
