@@ -23,7 +23,10 @@
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="css/style.css"/>
 
-
+ <!-- 引入 Vue.js -->
+    	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    	<!-- 引入 AWS SDK -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.814.0/aws-sdk.min.js"></script>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -75,7 +78,18 @@
 			<li class="control" data-filter=".lifestyle">Lifestyle</li>
 			<li class="control" data-filter=".fashion">Fashion</li>
 		</ul>                                                           
-		<div class="row portfolio-gallery m-0">
+		<div id="app" class="row portfolio-gallery m-0">
+			<div 
+  class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0 nature" 
+  v-for="(image, index) in images" 
+  :key="index">
+    <a 
+      :href="image.url" 
+      class="portfolio-item img-popup set-bg" 
+      :data-setbg="image.url">
+    </a>
+</div>
+
 			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0 nature">
 				<a href="img/portfolio/1.jpg" class="portfolio-item img-popup set-bg" data-setbg="img/portfolio/1.jpg"></a>
 			</div>
@@ -188,7 +202,68 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 	<!-- Search model end -->
+<!-- Search model end -->
+	<script>
+    new Vue({
+      el: '#app',
+      data: {
+        images: []  // 用于存储从 R2 获取的图片
+      },
+      methods: {
+        // 封装的获取 Cloudflare R2 图片的函数
+        async fetchImagesFromR2() {
+          const accessKeyId = '145934bf583c3ee6ef1cea1ffe873a73';
+          const secretAccessKey = '3247d709c25e6df00563c40942873fb249e198a1118b6818612e4e6d3caff4f4';
+          const bucketName = 'pic-impact';
+          const endpoint = 'https://b1935e359615d1949f67f2b1e8050ec8.r2.cloudflarestorage.com';
+          const publicURL = 'https://pub-c0e7f6c66b954c3a93e96fc7aa5425c6.r2.dev';
 
+          // 初始化 AWS S3 客户端
+          const s3 = new AWS.S3({
+            accessKeyId: accessKeyId,
+            secretAccessKey: secretAccessKey,
+            endpoint: endpoint,
+            s3ForcePathStyle: true,
+            signatureVersion: 'v4',
+            region: 'auto'
+          });
+     
+          const params = { Bucket: bucketName };
+
+         try {
+  // 获取 Bucket 中的所有对象
+  s3.listObjectsV2(params, (err, data) => {
+    if (err) {
+      console.log('Error', err);
+    } else {
+      // 过滤出图片并生成 URL
+      const images = data.Contents.filter(item => 
+        item.Key.endsWith('.JPG') || 
+        item.Key.endsWith('.png') || 
+        item.Key.endsWith('.gif') || 
+        item.Key.endsWith('.jpeg')
+      ).map(item => ({
+        key: item.Key,
+        url: `${publicURL}/${item.Key}`
+      }));
+
+      // 使用 slice 保留前 2 个图片
+      this.images = images.slice(0,20); 
+
+      console.log(this.images); // 验证切片后的数组
+    }
+  });
+} catch (error) {
+  console.error('Error fetching images:', error);
+}
+        }
+      },
+      mounted() {
+        // 在组件挂载时调用获取图片的函数
+        this.fetchImagesFromR2();
+      }
+    });
+  </script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
