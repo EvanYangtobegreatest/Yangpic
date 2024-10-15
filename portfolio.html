@@ -82,7 +82,7 @@
 
     <div id="app" class="row portfolio-gallery m-0">
       <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-	        <a :href="image.url" class="portfolio-item img-popup set-bg" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
+	        <a :href="image.url" class="portfolio-item img-popup set-bg img-popup" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
             </div>
         
         <!-- Next Button -->
@@ -192,6 +192,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             $('.set-bg').each(function() {
                 var bg = $(this).data('setbg');
                 $(this).css('background-image', 'url(' + bg + ')');
+            });
+        });
+	        // 在Vue渲染完成后初始化 Magnific Popup
+        this.$nextTick(() => {
+            $('.img-popup').magnificPopup({
+                type: 'image',
+                mainClass: 'img-popup-warp',
+                removalDelay: 500,
             });
         });
       }
