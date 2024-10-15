@@ -80,9 +80,7 @@
 			<li class="control" data-filter=".fashion">Fashion</li>
 		</ul>                                                           
 		<div id="app" class="row portfolio-gallery m-0"  v-for="(image, index) in images" :key="index" >
-			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-	        <a :href="image.url" class="portfolio-item img-popup set-bg img-popup" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
-            </div>
+			
 		
 			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
 				<div class="portfolio-item  next-btn">
