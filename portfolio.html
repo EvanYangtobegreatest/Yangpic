@@ -79,13 +79,10 @@
         <li class="control" data-filter=".fashion" @click="filterImages('fashion')">Fashion</li>
     </ul>                                                           
 
-<div id="app" class="row portfolio-gallery m-0">
-    <div v-if="loading" class="loading-message">Loading...</div> <!-- 显示加载信息 -->
-
-    <div v-else>
-        <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-            <a :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
-        </div>
+    <div id="app" class="row portfolio-gallery m-0">
+      <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
+                <a :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
+            </div>
         
         <!-- Next Button -->
         <div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
@@ -95,7 +92,6 @@
         </div>
     </div>
 </div>
-
 	<!-- Portfolio section end  -->
 	
 	<!-- Footer section   -->
@@ -140,37 +136,54 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         images: []  // 用于存储从 R2 获取的图片
       },
       methods: {
-        methods: {
-    async fetchImagesFromR2() {
-        const accessKeyId = '145934bf583c3ee6ef1cea1ffe873a73';
-        const secretAccessKey = '3247d709c25e6df00563c40942873fb249e198a1118b6818612e4e6d3caff4f4';
-        const bucketName = 'pic-impact';
-        const endpoint = 'https://b1935e359615d1949f67f2b1e8050ec8.r2.cloudflarestorage.com';
-        const publicURL = 'https://b751a9f.webp.li';
+        // 封装的获取 Cloudflare R2 图片的函数
+        async fetchImagesFromR2() {
+          const accessKeyId = '145934bf583c3ee6ef1cea1ffe873a73';
+          const secretAccessKey = '3247d709c25e6df00563c40942873fb249e198a1118b6818612e4e6d3caff4f4';
+          const bucketName = 'pic-impact';
+          const endpoint = 'https://b1935e359615d1949f67f2b1e8050ec8.r2.cloudflarestorage.com';
+          const publicURL = 'https://b751a9f.webp.li';
 
-        const s3 = new AWS.S3({
+          // 初始化 AWS S3 客户端
+          const s3 = new AWS.S3({
             accessKeyId: accessKeyId,
             secretAccessKey: secretAccessKey,
             endpoint: endpoint,
-            s3ForcePathStyle: true // needed with minio?
-        });
+            s3ForcePathStyle: true,
+            signatureVersion: 'v4',
+            region: 'auto'
+          });
+     
+          const params = { Bucket: bucketName };
 
-        try {
-            const data = await s3.listObjectsV2({ Bucket: bucketName }).promise();
-            this.images = data.Contents.map(object => ({
-                url: `${publicURL}/${object.Key}`
-            }));
-        } catch (error) {
-            console.error('Error fetching images from R2:', error);
-        } finally {
-            this.loading = false; // 隐藏加载信息
-        }
-    },
-    // 筛选图片
-    filterImages(filter) {
-        // 实现筛选逻辑
+         try {
+  // 获取 Bucket 中的所有对象
+  s3.listObjectsV2(params, (err, data) => {
+    if (err) {
+      console.log('Error', err);
+    } else {
+      // 过滤出图片并生成 URL
+      const images = data.Contents.filter(item => 
+        item.Key.endsWith('.jpg') || 
+        item.Key.endsWith('.png') || 
+        item.Key.endsWith('.gif') || 
+        item.Key.endsWith('.jpeg')
+      ).map(item => ({
+        key: item.Key,
+        url: `${publicURL}/${item.Key}`
+      }));
+
+      // 使用 slice 保留前 2 个图片
+      this.images = images.slice(0,5); 
+
+      console.log(this.images); // 验证切片后的数组
     }
-},
+  });
+} catch (error) {
+  console.error('Error fetching images:', error);
+}
+        }
+      },
       mounted() {
         // 在组件挂载时调用获取图片的函数
         this.fetchImagesFromR2();
