@@ -137,6 +137,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         images: []  // 用于存储从 R2 获取的图片
       },
       methods: {
+	initMagnificPopup() {
+            // 初始化Magnific Popup插件
+            $('.img-popup').magnificPopup({
+                type: 'image',
+                mainClass: 'img-popup-warp',
+                removalDelay: 500,
+            });
+        }
+    }, 
+	    updated() {
+        // 在数据更新时重新初始化插件
+        this.$nextTick(() => {
+            this.initMagnificPopup();
+        });
+    }
         // 封装的获取 Cloudflare R2 图片的函数
         async fetchImagesFromR2() {
           const accessKeyId = '145934bf583c3ee6ef1cea1ffe873a73';
@@ -194,13 +209,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 $(this).css('background-image', 'url(' + bg + ')');
             });
         });
-	        // 在Vue渲染完成后初始化 Magnific Popup
+	// 确保DOM渲染完成后初始化插件
         this.$nextTick(() => {
-            $('.img-popup').magnificPopup({
-                type: 'image',
-                mainClass: 'img-popup-warp',
-                removalDelay: 500,
-            });
+            this.initMagnificPopup();
         });
       }
     });
