@@ -81,7 +81,7 @@
 
     <div id="app" class="row portfolio-gallery m-0">
         <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0" >
-            <a :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
+            <a :href="image.url" class="portfolio-item img-popup set-bg"> <img src="image.url" alt="Image" ></a>
         </div>
         
         <!-- Next Button -->
@@ -130,7 +130,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- Search model end -->
 <!-- Search model end -->
 	<script>
-		 window.onload = function() {
     new Vue({
       el: '#app',
       data: {
@@ -190,7 +189,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         this.fetchImagesFromR2();
       }
     });
-		 }
+		 
   </script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>
