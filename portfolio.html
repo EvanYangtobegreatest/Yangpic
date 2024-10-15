@@ -79,15 +79,19 @@
 			<li class="control" data-filter=".lifestyle">Lifestyle</li>
 			<li class="control" data-filter=".fashion">Fashion</li>
 		</ul>                                                           
-		<div id="app" class="row portfolio-gallery m-0"  v-for="(image, index) in images" :key="index" >
-			
-		
-			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-				<div class="portfolio-item  next-btn">
-					<h2>Next</h2>
-				</div>
-			</div>
-		</div>
+		<div id="app" class="row portfolio-gallery m-0">
+    <!-- 使用 v-for 循环生成图片 -->
+    <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
+        <a :href="image.url" class="portfolio-item img-popup set-bg" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
+    </div>
+
+    <!-- Next 按钮应该在 v-for 循环外部 -->
+    <div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
+        <div class="portfolio-item next-btn">
+            <h2>Next</h2>
+        </div>
+    </div>
+</div>
 	</div>
 	<!-- Portfolio section end  -->
 	
