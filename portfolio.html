@@ -80,9 +80,9 @@
         <li class="control" data-filter=".fashion" @click="filterImages('fashion')">Fashion</li>
     </ul>                                                           
 
-    <div id="app" class="row portfolio-gallery m-0">
+   <div id="app" class="row portfolio-gallery m-0">
       <div v-for="(image, index) in images" :key="index" class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
-	        <a :href="image.url" class="portfolio-item img-popup set-bg" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
+	        <a :href="image.url" class="portfolio-item img-popup set-bg img-popup" :style="{ backgroundImage: 'url(' + image.url + ')' }"></a>
             </div>
         
         <!-- Next Button -->
@@ -130,7 +130,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</div>
 	<!-- Search model end -->
 <!-- Search model end -->
-	<script>
+<script>
     new Vue({
       el: '#app',
       data: {
@@ -188,13 +188,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       },
       mounted() {
         // 在组件挂载时调用获取图片的函数
-        this.fetchImagesFromR2().then(() => {
-            // 图片获取完成后，设置背景
-            $('.set-bg').each(function() {
-                var bg = $(this).data('setbg');
-                $(this).css('background-image', 'url(' + bg + ')');
-            });
-        });
+        this.fetchImagesFromR2()
       }
     });
 		 
