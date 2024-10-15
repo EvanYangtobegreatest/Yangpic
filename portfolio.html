@@ -78,16 +78,9 @@
 			<li class="control" data-filter=".lifestyle">Lifestyle</li>
 			<li class="control" data-filter=".fashion">Fashion</li>
 		</ul>                                                           
-		<div id="app" class="row portfolio-gallery m-0">
-			<div 
-  class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0" 
-  v-for="(image, index) in images" 
-  :key="index">
-    <a 
-      :href="image.url" 
-      class="portfolio-item img-popup set-bg" 
-      :data-setbg="image.url">
-    </a>
+		<div id="app" class="row portfolio-gallery m-0" v-for="(image, index) in images"  :key="index">
+			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0" >
+    <a  :href="image.url" class="portfolio-item img-popup set-bg" :data-setbg="image.url"></a>
 </div>
 
 			<div class="mix col-xl-2 col-md-3 col-sm-4 col-6 p-0">
