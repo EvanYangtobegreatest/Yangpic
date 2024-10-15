@@ -571,13 +571,19 @@ ol {
 ---------------------*/
 
 .hero-section {
-	clear: both;
-	position: relative;
+    clear: both;
+    position: relative;
+    width: 100%; /* Full width */
+    overflow: hidden; /* Ensure no overflow from children */
 }
 
 .hero-item {
-	height: 278px;
-	position: relative;
+    height: 278px; /* Defined height for the item */
+    position: relative;
+    background-size: cover; /* Ensure the background image covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background from repeating */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
 .hero-item:hover .hero-link {
