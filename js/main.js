@@ -116,10 +116,10 @@ $(window).on('load', function() {
 	/*------------------
 		Background Set
 	--------------------*/
-	// $('.set-bg').each(function() {
-	// 	var bg = $(this).data('setbg');
-	// 	$(this).css('background-image', 'url(' + bg + ')');
-	// });
+	$('.set-bg').each(function() {
+		var bg = $(this).data('setbg');
+		$(this).css('background-image', 'url(' + bg + ')');
+	});
 
 
 	/*------------------
@@ -174,11 +174,11 @@ $(window).on('load', function() {
 	/*------------------
 		Image Popup
 	--------------------*/
-	// $('.img-popup').magnificPopup({
-	// 	type: 'image',
-	// 	mainClass: 'img-popup-warp',
-	// 	removalDelay: 500,
-	// });
+	$('.img-popup').magnificPopup({
+		type: 'image',
+		mainClass: 'img-popup-warp',
+		removalDelay: 500,
+	});
 	
 
 	/*------------------
